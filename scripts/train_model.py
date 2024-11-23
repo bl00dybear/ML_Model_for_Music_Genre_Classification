@@ -69,5 +69,7 @@ def construct_model(path_dataset_csv,dataset_path):
     model.save(os.path.join(model_directory, 'music_genre_classifier.h5'))
     print(f'Model saved at {model_directory}')
 
+    print((x_train.shape[1],))
+
     return history
 
