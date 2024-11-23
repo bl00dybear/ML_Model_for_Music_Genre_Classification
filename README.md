@@ -36,6 +36,9 @@ model = tf.keras.Sequential([
         tf.keras.layers.Dense(len(genres), activation='softmax')
     ])
 ```
+#### And for this one we have this diagram:
+![img.png](img.png)
+
 #### Loss Reduction:
 Both the training set loss (Train Loss) and the validation set loss (Validation Loss) decrease steadily until they reach a nearly stable point (around epoch 20).
 This indicates that the model is learning well and there is no obvious overfitting, as the Train Loss and Validation Loss lines are close together.
@@ -44,4 +47,3 @@ The losses for training and validation converge to a similar value (approximatel
 #### Curve Stabilization:
 After about 15-20 epochs, the losses no longer decrease significantly. This suggests that the model has reached an optimal point in the learning process, and continuing training would not bring significant improvements.
 
-![img.png](img.png)
