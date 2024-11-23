@@ -10,6 +10,8 @@ from sklearn.preprocessing import LabelEncoder
 def construct_model(path_dataset_csv,dataset_path):
     data_frame = pd.read_csv(path_dataset_csv)
 
+    model_directory = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/models"
+
     x = np.array([np.fromstring(f, sep=' ') for f in data_frame["mfcc"]])
     y = data_frame["label"]
 
@@ -30,3 +32,13 @@ def construct_model(path_dataset_csv,dataset_path):
     ])
 
     model.compile(optimizer='adam',loss='sparse_categorical_cross entropy',metrics=['accuracy'])
+
+    model.fit(x_train, y_train, epochs=20, batch_size=32, validation_data=(x_test, y_test))
+
+    loss, accuracy = model.evaluate(x_test, y_test)
+    print(f'Loss: {loss}, Accuracy: {accuracy}')
+
+    os.makedirs(model_directory, exist_ok=True)
+    model.save(os.path.join(model_directory, 'music_genre_classifier.h5'))
+    print(f'Model saved at {model_directory}')
+
