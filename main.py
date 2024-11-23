@@ -1,2 +1,3 @@
-from scripts import read_and_preprocess_data
+from scripts.read_and_preprocess_data import prepare_dataset
 
+prepare_dataset()

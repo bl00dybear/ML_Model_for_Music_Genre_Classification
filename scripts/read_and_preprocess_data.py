@@ -1,6 +1,7 @@
 import os
 import librosa
 import numpy as np
+import pandas as pd
 
 
 def extract_mfcc(file_path):
@@ -22,8 +23,8 @@ def extract_mfcc(file_path):
         print(f"Eroare la procesarea fișierului {file_path}: {e}")
         return None
 
-def read_data_folder():
-    dataset_path = "../dataset"
+def prepare_dataset():
+    dataset_path = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/dataset"
 
     genres = os.listdir(dataset_path)
 
@@ -42,5 +43,4 @@ def read_data_folder():
                     if mfcc is not None:
                         data["mfcc"].append(mfcc)
                         data["labels"].append(genre)
-
-
+    return pd.DataFrame(data)
