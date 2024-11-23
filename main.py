@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from scripts.read_and_preprocess_data import prepare_dataset
 from scripts.train_model import construct_model
 
@@ -8,4 +9,9 @@ dataset_path_raw = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classificati
 #data_set = prepare_dataset()
 #data_set.to_csv(path_dataset_csv,index=False)
 
-construct_model(path_dataset_csv,dataset_path_raw)
+history = construct_model(path_dataset_csv,dataset_path_raw)
+
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.legend()
+plt.show()
