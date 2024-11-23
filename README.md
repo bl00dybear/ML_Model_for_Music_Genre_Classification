@@ -11,7 +11,7 @@ model = tf.keras.Sequential([
     ])
 ```
 and this diagram indicates that my model is likely overfitting. Here's how we can interpret the graph:
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 #### Train Loss Curve:
 Continuously decreases, meaning the model is learning well from the training data. There are no large fluctuations, suggesting that it's not encountering convergence problems.
 
@@ -37,7 +37,7 @@ model = tf.keras.Sequential([
     ])
 ```
 #### And for this one we have this diagram:
-![img.png](img.png)
+![img.png](images/img.png)
 
 #### Loss Reduction:
 Both the training set loss (Train Loss) and the validation set loss (Validation Loss) decrease steadily until they reach a nearly stable point (around epoch 20).
