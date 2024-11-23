@@ -24,7 +24,7 @@ def extract_mfcc(file_path):
         return None
 
 def prepare_dataset():
-    dataset_path = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/dataset"
+    dataset_path = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/dataset/raw"
 
     genres = os.listdir(dataset_path)
 
