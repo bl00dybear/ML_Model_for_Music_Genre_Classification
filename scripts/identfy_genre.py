@@ -5,28 +5,20 @@ import pandas as pd
 
 
 def extract_mfcc(file_path, n_mfcc=128, n_fft=2048, hop_length=512):
-    # Încarcă fișierul audio
-    signal, sr = librosa.load(file_path, sr=None)  # sr=None păstrează rata de eșantionare originală
-
-    # Extrage MFCC folosind argumente cheie
-    mfccs = librosa.feature.mfcc(y=signal, sr=sr, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length)
-
-    # Poți normaliza MFCC-urile sau le poți reda direct
-    mfccs = np.mean(mfccs, axis=1)  # Poți calcula media pe întreaga durată a semnalului
+    y, sr = librosa.load(file_path, sr=None)
+    mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length)
+    mfccs = np.mean(mfccs.T, axis=0)
 
     return mfccs
 
 
 def predict_genre(file_path, model, genres):
-    # Extrage coeficientii MFCC si redimensioneaza pentru a fi compatibili cu modelul
     mfccs = extract_mfcc(file_path)
-    print(mfccs)
-    mfccs = mfccs.reshape(1,13)# (1, 128)
-    print(mfccs)
+    # print(mfccs)
+    mfccs = mfccs.reshape(1,-1)# (1, 128)
+    # print(mfccs.shape)
     prediction = model.predict(mfccs)
-    predicted_genre = genres[np.argmax(prediction)]  # Returnează genul cu probabilitatea maximă
-    # print("aiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiixi")
-
+    predicted_genre = genres[np.argmax(prediction)]
 
     return predicted_genre
 

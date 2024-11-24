@@ -10,12 +10,14 @@ def extract_mfcc(file_path):
         # y stocheaza datele audio ca numere reprezentand un sample la un anumit moment
         # sr sample ratio (nr lor pe secunda)
 
-        mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+        mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=128)
+        print(mfccs.shape)
         # Ia semnalul audio original y
         # Calculează transformarea Fourier a semnalului
         # Mapează rezultatul pe o scală de frecvență Mel, care imită mai bine percepția umană
         # Aplică o transformare cosinus discretă pentru a obține coeficienții MFCC
-        # Returnează o matrice cu 13 rânduri (fiecare rând reprezintă un coeficient MFCC) și un număr de coloane egal cu numărul de cadre de timp din semnalul audio.
+        # Returnează o matrice cu 128 rânduri (fiecare rând reprezintă un coeficient MFCC) și
+        # un număr de coloane egal cu numărul de cadre de timp din semnalul audio.
 
         return np.mean(mfccs.T, axis=0)
 
@@ -33,7 +35,7 @@ def prepare_dataset():
         "labels": []    # genul melodiei
     }
 
-    for genre in genres:
+    for genre in sorted(genres):
         genre_path = os.path.join(dataset_path, genre) #construim path ul genurilor
         if os.path.isdir(genre_path):
             for file in os.listdir(genre_path):
@@ -42,5 +44,7 @@ def prepare_dataset():
                     mfcc = extract_mfcc(file_path)
                     if mfcc is not None:
                         data["mfcc"].append(mfcc)
+                        print(genre)
                         data["labels"].append(genre)
+    print(data["labels"])
     return pd.DataFrame(data)

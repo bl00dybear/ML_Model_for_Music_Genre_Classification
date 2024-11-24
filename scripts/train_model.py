@@ -11,13 +11,15 @@ from sklearn.preprocessing import LabelEncoder
 
 
 
-def construct_model(path_dataset_csv,dataset_path):
+def construct_model(path_dataset_csv,dataset_path,data_set):
     data_frame = pd.read_csv(path_dataset_csv)
 
     model_directory = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/models"
 
-    x = np.array([np.fromstring(f, sep=' ') for f in data_frame["mfcc"]])
-    y = data_frame["labels"]
+    x = np.array([f for f in data_set["mfcc"]])
+    y = data_set["labels"]
+
+    # print(x.shape[1])
 
     encoder = LabelEncoder()
     y_encoded = encoder.fit_transform(y)
@@ -27,6 +29,9 @@ def construct_model(path_dataset_csv,dataset_path):
     x_train, x_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=42)
 
     genres = os.listdir(dataset_path)
+
+    # print("shape")
+    # print(x_train.shape[1])
 
     model = tf.keras.Sequential([
         tf.keras.layers.Dense(128, input_shape=(x_train.shape[1],), activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l2(0.01)),
@@ -38,6 +43,7 @@ def construct_model(path_dataset_csv,dataset_path):
         tf.keras.layers.Dropout(0.3),
 
         tf.keras.layers.Dense(32, activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l2(0.01)),
+        tf.keras.layers.BatchNormalization(),
         tf.keras.layers.Dropout(0.3),
 
         tf.keras.layers.Dense(len(genres), activation='softmax')
@@ -50,7 +56,7 @@ def construct_model(path_dataset_csv,dataset_path):
 
     early_stopping = EarlyStopping(
         monitor='val_loss',
-        patience=3,  # Oprește dacă nu există îmbunătățiri în 3 epoci consecutive
+        patience=5,  # Oprește dacă nu există îmbunătățiri în 5 epoci consecutive
         restore_best_weights=True
     )
 
@@ -69,7 +75,6 @@ def construct_model(path_dataset_csv,dataset_path):
     model.save(os.path.join(model_directory, 'music_genre_classifier.h5'))
     print(f'Model saved at {model_directory}')
 
-    print((x_train.shape[1],))
+    print(model.summary())
 
     return history
-
