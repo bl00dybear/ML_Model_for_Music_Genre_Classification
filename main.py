@@ -16,3 +16,6 @@ def create_model():
     plt.plot(history.history['val_loss'], label='Validation Loss')
     plt.legend()
     plt.show()
+
+
+# create_model()
