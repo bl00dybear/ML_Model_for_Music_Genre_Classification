@@ -9,7 +9,7 @@ from scripts.identfy_genre import predict_genre_from_first_file_in_directory
 if __name__ == "__main__":
     output_dir = "test"
     directory = output_dir
-    genres = ['blues', 'classical', 'country', 'disco', 'hiphop', 'metal', 'pop', 'reggae', 'rock']
+    genres = ['classical', 'hiphop', 'rock']
     model_path = '/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/models/music_genre_classifier.h5'
     source_folder = "/home/sebi/ML_Learning/ML_Model_for_Music_Genre_Classification/test"
 
