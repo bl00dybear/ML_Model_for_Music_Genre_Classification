@@ -29,8 +29,16 @@ def convert_webm_to_wav_in_directory(dirr):
                 input_file = os.path.join(root, file)
                 output_file = os.path.splitext(input_file)[0] + ".wav"
 
-                # Comanda FFmpeg pentru conversie cu limită de 30 de secunde
-                command = f'ffmpeg -loglevel quiet -t 30 -i "{input_file}" -ab 192k -ac 2 "{output_file}"'
+                # Obține durata fișierului folosind ffprobe
+                ffprobe_command = f'ffprobe -i "{input_file}" -show_entries format=duration -v quiet -of csv="p=0"'
+                result = subprocess.run(ffprobe_command, shell=True, capture_output=True, text=True)
+                duration = float(result.stdout.strip())
+
+                # Calculează punctul de start pentru segmentul de 30 de secunde
+                start_time = max(0, (duration / 2) - 15)  # Evită valori negative
+
+                # Comanda FFmpeg pentru conversie
+                command = f'ffmpeg -loglevel quiet -ss {start_time} -t 30 -i "{input_file}" -ab 192k -ac 2 "{output_file}"'
                 subprocess.call(command, shell=True)
 
                 # Șterge fișierul .webm după conversie

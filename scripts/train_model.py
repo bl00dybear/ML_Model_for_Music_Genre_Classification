@@ -56,7 +56,7 @@ def construct_model(path_dataset_csv,dataset_path,data_set):
 
     early_stopping = EarlyStopping(
         monitor='val_loss',
-        patience=5,  # Oprește dacă nu există îmbunătățiri în 5 epoci consecutive
+        patience=3,  # Oprește dacă nu există îmbunătățiri în 5 epoci consecutive
         restore_best_weights=True
     )
 
