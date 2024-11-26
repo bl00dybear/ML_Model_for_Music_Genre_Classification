@@ -1,6 +1,6 @@
 # A Beta version of A CNN Model for music genre recognition
 
-At this moment my model recognise 2 music genres: rock and hiphop.
+### At this moment my model recognise 2 music genres: rock and hiphop.
 <br>In the beginning I used a dataset downloaded from `https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification` and the following diagrams are based on it.
 
 
@@ -55,4 +55,4 @@ After about 15-20 epochs, the losses no longer decrease significantly. This sugg
 
 After testing it on my own, I observed that the results are not precisely as I expected. 
 <br>So at this point I made the decision to change my dataset, and make it by my own. I made a script for downloading playlists from YouTube and after download I preprocessed each song by cutting in 30 seconds pieces. Now my dataset have about 1300 audio files per genre. With this dataset I trained again my model, now having this diagram:
-![img.png](images/img3.png)
+<br>![img.png](images/img3.png)
