@@ -1,9 +1,10 @@
 # A Beta version of A CNN Model for music genre recognition
 
 ### At this moment my model recognise 2 music genres: rock and hiphop.
-<br>In the beginning I used a dataset downloaded from `https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification` and the following diagrams are based on it.
+
 
 ## First stage
+<br>In the beginning I used a dataset downloaded from `https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification` and the following diagrams are based on it.
 ### My first model was the following one:
 ```python
 model = tf.keras.Sequential([
@@ -14,7 +15,7 @@ model = tf.keras.Sequential([
     ])
 ```
 and this diagram indicates that my model is likely overfitting. Here's how we can interpret the graph:
-![img_1.png](images/img_1.png)
+<br>![img_1.png](images/img_1.png)
 #### Train Loss Curve:
 Continuously decreases, meaning the model is learning well from the training data. There are no large fluctuations, suggesting that it's not encountering convergence problems.
 
@@ -53,8 +54,8 @@ After about 15-20 epochs, the losses no longer decrease significantly. This sugg
 ## Second Stage
 
 After testing it on my own, I observed that the results are not precisely as I expected. 
-<br>So at this point I made the decision to change my dataset, and make it by my own. I made a script for downloading playlists from YouTube and after download I preprocessed each song by cutting in 30 seconds pieces. Now my dataset have about 1300 audio files per genre. With this dataset I trained again my model, now having this diagram:
+<br>So at this point I made the decision to change my dataset, and make it by my own. I made a script for downloading playlists from YouTube and after download I preprocessed each song by cutting in 30 seconds pieces. Now my dataset have about 1300 audio files per genre. With this dataset I trained again my model, now having this results:
 <br>![img.png](images/img3.png)
-
+<br>To automate the database creation process, I created a script that I give a link to from a YouTube playlist and it downloads all my songs and divides them into 30-second sections.
 ## Theory
 `MFCCs` are a feature representation that captures the spectral envelope of the audio signal, making it useful for various audio analysis tasks.
