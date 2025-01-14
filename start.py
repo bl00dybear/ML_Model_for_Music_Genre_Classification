@@ -1,7 +1,7 @@
 import tensorflow
 import os
 import shutil
-from main import *
+from model_creator import *
 from scripts.process_youtube_song import download_youtube_audio_as_wav
 from scripts.process_youtube_song import convert_webm_to_wav_in_directory
 from scripts.identfy_genre import predict_genre_from_first_file_in_directory

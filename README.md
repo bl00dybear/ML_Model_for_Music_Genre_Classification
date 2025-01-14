@@ -7,6 +7,8 @@
 <br>In the beginning I used a dataset downloaded from `https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification` and the following diagrams are based on it.
 ### My first model was the following one:
 ```python
+import tensorflow as tf 
+
 model = tf.keras.Sequential([
         tf.keras.layers.Dense(128, input_shape=(x_train.shape[1],), activation='relu'),
         tf.keras.layers.Dropout(0.5),
@@ -25,6 +27,8 @@ Increases after the first epoch, indicating that the model is starting to memori
 
 ### My second model (and the final one) is :
 ```python
+import tensorflow as tf 
+
 model = tf.keras.Sequential([
         tf.keras.layers.Dense(128, input_shape=(x_train.shape[1],), activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l2(0.01)),
         tf.keras.layers.BatchNormalization(),
@@ -56,6 +60,6 @@ After about 15-20 epochs, the losses no longer decrease significantly. This sugg
 After testing it on my own, I observed that the results are not precisely as I expected. 
 <br>So at this point I made the decision to change my dataset, and make it by my own. I made a script for downloading playlists from YouTube and after download I preprocessed each song by cutting in 30 seconds pieces. Now my dataset have about 1300 audio files per genre. With this dataset I trained again my model, now having this results:
 <br>![img.png](images/img3.png)
-<br>To automate the database creation process, I created a script that I give a link to from a YouTube playlist and it downloads all my songs and divides them into 30-second sections.
+<br>To automate the database creation process, I created a script that I give a link to from a YouTube playlist and it downloads all my songs and divides them into 30-second sections `playlist_downloader.py`.
 ## Theory
 `MFCCs` are a feature representation that captures the spectral envelope of the audio signal, making it useful for various audio analysis tasks.
